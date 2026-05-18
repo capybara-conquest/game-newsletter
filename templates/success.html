@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Success</title>
+    <style>
+        body {
+            background-color: #0b0b1a;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .box {
+            background: #11112b;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 30px rgba(255,255,255,0.1);
+            text-align: center;
+            width: 350px;
+        }
+
+        h2 {
+            color: #6c63ff;
+        }
+
+        p {
+            color: #dcdcff;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #6c63ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back:hover {
+            background: #5548ff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>✅ Email Sent!</h2>
+    <p>
+        Your welcome email has been sent to:
+        <br>
+        <strong>{{ email }}</strong>
+    </p>
+    <a class="back" href="/">Go Back</a>
+</div>
+
+</body>
+</html>
