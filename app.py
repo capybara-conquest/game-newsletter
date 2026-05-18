@@ -19,28 +19,35 @@ SENDER_PASSWORD = os.getenv('SENDER_PASSWORD')
 
 def send_email(user_email):
     try:
+        print("📧 EMAIL THREAD START:", user_email, flush=True)
+
         msg = MIMEMultipart()
         msg['From'] = SENDER_EMAIL
         msg['To'] = user_email
         msg['Subject'] = "Welcome to Capybara Conquest"
 
-        body = (
-            "Thank you for subscribing to Capybara Conquest Newsletter.\n"
-            "You will receive updates on the latest game news and updates.\n"
-            "Stay tuned for more exciting content!\n\n"
-            "Best regards,\n"
-            "Capybara Conquest Team"
-        )
+        msg.attach(MIMEText("Thanks for subscribing!", 'plain'))
 
-        msg.attach(MIMEText(body, 'plain'))
+        print("🔌 Connecting SMTP...", flush=True)
 
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=15) as server:
-            server.starttls()
-            server.login(SENDER_EMAIL, SENDER_PASSWORD)
-            server.send_message(msg)
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=20)
+        server.set_debuglevel(1)
+
+        print("🔐 STARTTLS...", flush=True)
+        server.starttls()
+
+        print("🔑 LOGIN...", flush=True)
+        server.login(SENDER_EMAIL, SENDER_PASSWORD)
+
+        print("📤 SENDING...", flush=True)
+        server.send_message(msg)
+
+        server.quit()
+
+        print("✅ EMAIL SENT SUCCESS", flush=True)
 
     except Exception as e:
-        print("Email failed:", e)
+        print("❌ EMAIL FAILED:", repr(e), flush=True)
 
 
 @app.route("/")
